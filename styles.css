@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid black;
+    height: 465px;
+    width: 350px;
+    margin-top: 100px;
+    border-radius: 20px;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    height: 85px;
+    width: 305px;
+    border: 2px solid black;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.function-buttons {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 4px;
+}
+
+.function-buttons button {
+    color: black;
+    padding: 16px 50px;
+    font-size: 14px;
+}
+
+.row-1 button {
+    margin: 5px;
+}
+
+.row-2 button {
+    margin: 5px;
+}
+
+.row-3 button {
+    margin: 5px;
+}
+
+.row-4 button {
+    margin: 5px;
+}
+
+.main-buttons button {
+    padding: 16px 30px;
+    font-size: 14px;
+    height: 55px;
+    width: 70px;
+}
+
+button {
+    border: 2px solid black;
+    border-radius: 4px;
+
+}
+
+#clearBtn {
+    background-color: #f34343;
+}
+
+
+#clearBtn:hover {
+    background-color: #fc7474;
+}
+
+#clearBtn:active {
+    background-color: #ef2121;
+}
+#deleteBtn {
+    background-color: #687ff2;
+}
+
+#deleteBtn:hover {
+    background-color: #9dacf8;
+}
+
+#deleteBtn:active {
+    background-color: #415eef;
+}
+
+.display {
+    display: grid;
+    justify-items: end;
+    overflow: hidden;
+}
+
+#input {
+    display: flex;
+    font-size: 30px;
+    align-self: flex-end;
+    justify-content: right;
+    overflow: hidden;
+}
+
+#history {
+    align-self: start;
+    overflow: hidden;
+    white-space: nowrap;
+}
