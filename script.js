@@ -105,30 +105,32 @@ equals.addEventListener('click', () => {
     input.textContent = stringParser(input.textContent)
 })
 
+
+// parses the given string when the equals button is pressed and returns the correct calculation so that the display can be updated
 function stringParser(string) {
     let x = '';
     let y = '';
-    let currOperator;
-    let operatorUsed = false;
-    let lastOperatorIndex = 0;
+    let currOperator; // last operator used
+    let operatorUsed = false; // whether there has been a recent operator
+    let lastOperatorIndex = 0; // the index of the last used operator
     let numberToReturn = 0;
     for (let i = 0; i < string.length; i++) {
         if (operatorUsed) { 
-            if (OPERATORS.includes(string[i]) && !(string[i] == '-')) {
+            if (OPERATORS.includes(string[i]) && !(string[i] == '-')) { // checks if there's another operator being used, calculates and updates before moving on
                 x = operate(currOperator, x, y);
                 y = ''
-                currOperator = string[i]
+                currOperator = string[i] // updates the operator with the one just entered
                 lastOperatorIndex = i;
             } else {
-                if (isANumber(string[i]) || string[i] == '.') {
+                if (isANumber(string[i]) || string[i] == '.') { // if next element is a number or decimal point
                     y += string[i];
-                    if (string.length === i+1) {
+                    if (string.length === i+1) { // checks if end of string
                         numberToReturn = operate(currOperator, x, y);
                     }
                 } else {
-                    if ((lastOperatorIndex === i-1) && (string[i] === '-')) {
+                    if ((lastOperatorIndex === i-1) && (string[i] === '-')) { // allows you to use the subtraction sign also as a negation if used after an operator (e.g, 2 x -3)
                         y += string[i]
-                    } else{
+                    } else {
                     numberToReturn = operate(currOperator, x, y);
                     }
                 }
@@ -137,7 +139,7 @@ function stringParser(string) {
             if (isANumber(string[i]) || string[i] == '.') {
                 x += string[i];
             } else {
-                if (string[i] === "-" && i === 0) {
+                if (string[i] === "-" && i === 0) { // can start with a negative number
                     x += string[i]
                 } else {
                 currOperator = string[i];
