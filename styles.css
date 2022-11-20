@@ -108,3 +108,11 @@ button {
     overflow: hidden;
     white-space: nowrap;
 }
+
+.container {
+    background-color: #1bd3f7;
+}
+
+.display {
+    background-color: white;
+}

@@ -20,6 +20,8 @@ const addBtn = document.getElementById('add');
 const decimal = document.getElementById('decimal');
 const equals = document.getElementById('equals');
 
+const OPERATORS = ["x", "÷", "-", "+"];
+
 
 
 
@@ -72,13 +74,13 @@ numberNine.addEventListener('click', () => {
 })
 
 divideBtn.addEventListener('click', () => {
-    if (!input.textContent == ' ') {
+    if ((!input.textContent == ' ') && !(OPERATORS.includes(input.textContent.slice(-1)[0]))) {
     input.textContent += '÷';
     };
 })
 
 multiplyBtn.addEventListener('click', () => {
-    if (!input.textContent == ' ') {
+    if (!input.textContent == ' ' && !(OPERATORS.includes(input.textContent.slice(-1)[0]))) {
     input.textContent += 'x';
     };
 })
@@ -88,7 +90,7 @@ subtractBtn.addEventListener('click', () => {
 })
 
 addBtn.addEventListener('click', () => {
-    if (!input.textContent == ' ') {
+    if (!input.textContent == ' ' && !(OPERATORS.includes(input.textContent.slice(-1)[0]))) {
     input.textContent += '+';
     };
 })
@@ -105,13 +107,9 @@ equals.addEventListener('click', () => {
 
 
 // to do:
-// need to deal with negatives -  operator then it, negative * negative.
-// - at start of number
 // decimals
-// can't use two operators in a row
 
 function stringParser(string) {
-    let operators = ["x", "÷", "-", "+"];
     let x = '';
     let y = '';
     let currOperator;
