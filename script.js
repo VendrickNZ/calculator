@@ -84,9 +84,7 @@ multiplyBtn.addEventListener('click', () => {
 })
 
 subtractBtn.addEventListener('click', () => {
-    if (!input.textContent == ' ') {
     input.textContent += '-';
-    };
 })
 
 addBtn.addEventListener('click', () => {
@@ -105,38 +103,54 @@ equals.addEventListener('click', () => {
     input.textContent = stringParser(input.textContent)
 })
 
+
+// to do:
+// need to deal with negatives -  operator then it, negative * negative.
+// - at start of number
+// decimals
+// can't use two operators in a row
+
 function stringParser(string) {
     let operators = ["x", "÷", "-", "+"];
-    let numberList = [];
     let x = '';
     let y = '';
     let currOperator;
     let operatorUsed = false;
+    let lastOperatorIndex = 0;
     let numberToReturn = 0;
     for (let i = 0; i < string.length; i++) {
         if (operatorUsed) {
             if (!isNaN(string[i])) {
                 y += string[i];
                 if (string.length === i+1) {
+                    console.log(currOperator, x, y, "ah");
                     numberToReturn = operate(currOperator, x, y);
-                    console.log(numberToReturn);
                 }
             } else {
+                if ((lastOperatorIndex === i-1) && (string[i] === '-')) {
+                    y += string[i]
+                } else{
                 numberToReturn = operate(currOperator, x, y);
+                }
             }
-        }
-        if (!isNaN(string[i])) {
-            x += string[i];
         } else {
-            currOperator = string[i];
-            operatorUsed = true;
+            if (!isNaN(string[i])) {
+                x += string[i];
+            } else {
+                if (string[i] === "-" && i === 0) {
+                    x += string[i]
+                } else {
+                currOperator = string[i];
+                lastOperatorIndex = i;
+                operatorUsed = true;
+                }
+            }
         }
     }
     return numberToReturn;
 }
 
 let deleteLastElement = (string) => {
-    console.log(string);
     return string.slice(0, -1)
 }
 
@@ -147,15 +161,13 @@ let subtract = (x, y) => (x - y);
 let multiply = (x, y) => (x * y);
 let divide = (x, y) => (x / y);
 
-//to do:
-//need to deal with negatives
-//- at start of number
-//decimals
+
 
 function operate(operator, x, y) {
     if (operator == "+") {
         return add(x, y);
     } else if (operator == "-") {
+        console.log(operator, x, y);
         return subtract(x, y);
     } else if (operator == "x") {
         return multiply(x, y)
