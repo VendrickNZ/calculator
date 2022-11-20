@@ -119,6 +119,7 @@ function stringParser(string) {
                 y += string[i];
                 if (string.length === i+1) {
                     numberToReturn = operate(currOperator, x, y);
+                    console.log(numberToReturn);
                 }
             } else {
                 numberToReturn = operate(currOperator, x, y);
@@ -131,7 +132,6 @@ function stringParser(string) {
             operatorUsed = true;
         }
     }
-    console.log(numberToReturn);
     return numberToReturn;
 }
 
@@ -142,13 +142,17 @@ let deleteLastElement = (string) => {
 
 
 
-let add = (x, y) => (x + y);
+let add = (x, y) => (+x + +y);
 let subtract = (x, y) => (x - y);
 let multiply = (x, y) => (x * y);
 let divide = (x, y) => (x / y);
 
+//to do:
+//need to deal with negatives
+//- at start of number
+//decimals
+
 function operate(operator, x, y) {
-    console.log();
     if (operator == "+") {
         return add(x, y);
     } else if (operator == "-") {
@@ -161,7 +165,4 @@ function operate(operator, x, y) {
         }
     }
     return divide(x, y);
-    // operator == "+" ? add(x, y) : operator == "-" ? subtract(x, y)
-    // : operator == "x" ? multiply(x, y) : y === 0 ? null : divide(x, y)
 }
-
