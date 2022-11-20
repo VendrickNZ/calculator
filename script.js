@@ -105,10 +105,6 @@ equals.addEventListener('click', () => {
     input.textContent = stringParser(input.textContent)
 })
 
-
-// to do:
-// - times -
-
 function stringParser(string) {
     let x = '';
     let y = '';
@@ -123,7 +119,6 @@ function stringParser(string) {
                 y = ''
                 currOperator = string[i]
                 lastOperatorIndex = i;
-
             } else {
                 if (isANumber(string[i]) || string[i] == '.') {
                     y += string[i];
