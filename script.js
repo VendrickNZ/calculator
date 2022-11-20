@@ -107,7 +107,7 @@ equals.addEventListener('click', () => {
 
 
 // to do:
-// decimals
+// - times -
 
 function stringParser(string) {
     let x = '';
@@ -117,22 +117,29 @@ function stringParser(string) {
     let lastOperatorIndex = 0;
     let numberToReturn = 0;
     for (let i = 0; i < string.length; i++) {
-        if (operatorUsed) {
-            if (!isNaN(string[i])) {
-                y += string[i];
-                if (string.length === i+1) {
-                    console.log(currOperator, x, y, "ah");
-                    numberToReturn = operate(currOperator, x, y);
-                }
+        if (operatorUsed) { 
+            if (OPERATORS.includes(string[i]) && !(string[i] == '-')) {
+                x = operate(currOperator, x, y);
+                y = ''
+                currOperator = string[i]
+                lastOperatorIndex = i;
+
             } else {
-                if ((lastOperatorIndex === i-1) && (string[i] === '-')) {
-                    y += string[i]
-                } else{
-                numberToReturn = operate(currOperator, x, y);
+                if (isANumber(string[i]) || string[i] == '.') {
+                    y += string[i];
+                    if (string.length === i+1) {
+                        numberToReturn = operate(currOperator, x, y);
+                    }
+                } else {
+                    if ((lastOperatorIndex === i-1) && (string[i] === '-')) {
+                        y += string[i]
+                    } else{
+                    numberToReturn = operate(currOperator, x, y);
+                    }
                 }
             }
         } else {
-            if (!isNaN(string[i])) {
+            if (isANumber(string[i]) || string[i] == '.') {
                 x += string[i];
             } else {
                 if (string[i] === "-" && i === 0) {
@@ -145,14 +152,16 @@ function stringParser(string) {
             }
         }
     }
-    return numberToReturn;
+    return roundNumber(numberToReturn);
 }
 
 let deleteLastElement = (string) => {
     return string.slice(0, -1)
 }
 
+let isANumber = (x) => !isNaN(x);
 
+let roundNumber = (x) => x.toString().length <= 4 ? x : x.toFixed(3);
 
 let add = (x, y) => (+x + +y);
 let subtract = (x, y) => (x - y);
@@ -165,13 +174,13 @@ function operate(operator, x, y) {
     if (operator == "+") {
         return add(x, y);
     } else if (operator == "-") {
-        console.log(operator, x, y);
         return subtract(x, y);
     } else if (operator == "x") {
         return multiply(x, y)
     } else {
-        if (y === 0) {
-            return "NULL"
+        if (y == 0) {
+            alert("Dividing by zero are we?");
+            return ' '
         }
     }
     return divide(x, y);
